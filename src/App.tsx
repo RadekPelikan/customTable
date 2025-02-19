@@ -89,7 +89,7 @@ const DATA = {
 };
 
 const App = () => {
-  const { movies, setMovies, isLoading } = useMovieData();
+  const { movies, setMovies, reqState } = useMovieData();
 
   return (
     <>
