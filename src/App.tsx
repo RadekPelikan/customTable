@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMovieData } from "./hooks/movie";
+import MovieCard from "./MovieCard";
 
 const DATA = {
   header: ["First Name", "Last Name", "Age"],
@@ -87,10 +89,18 @@ const DATA = {
 };
 
 const App = () => {
-  console.log(DATA);
+  const { movies, setMovies, isLoading } = useMovieData();
+
   return (
     <>
       <Table header={DATA.header} data={DATA.data} />
+      <div className="grid gap-10 mx-2 my-3 sm:grid-cols-2 xl:grid-cols-3">
+        {movies?.map((movie) => (
+          <>
+            <MovieCard {...movie} />
+          </>
+        ))}
+      </div>
     </>
   );
 };
