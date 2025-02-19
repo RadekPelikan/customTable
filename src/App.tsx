@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMovieData } from "./hooks/movie";
 import MovieCard from "./MovieCard";
+import { Link, Route, Routes } from "react-router";
 
 const DATA = {
   header: ["First Name", "Last Name", "Age"],
@@ -89,11 +90,40 @@ const DATA = {
 };
 
 const App = () => {
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/table"
+          element={<Table header={DATA.header} data={DATA.data} />}
+        />
+        <Route path="/movies" element={<MovieGrid />} />
+      </Routes>
+    </>
+  );
+};
+
+const Navbar = () => {
+  return (
+    <nav>
+      <ul className="grid grid-flow-col gap-10 place-items-center mx-[20%]">
+        <Link to="/table">
+          <li>Table</li>
+        </Link>
+        <Link to="/movies">
+          <li>Movies</li>
+        </Link>
+      </ul>
+    </nav>
+  );
+};
+
+const MovieGrid = () => {
   const { movies, setMovies, reqState } = useMovieData();
 
   return (
     <>
-      <Table header={DATA.header} data={DATA.data} />
       <div className="grid gap-10 mx-2 my-3 sm:grid-cols-2 xl:grid-cols-3">
         {movies?.map((movie) => (
           <>
